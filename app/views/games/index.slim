@@ -1,0 +1,53 @@
+
+.ui.divider.hidden
+
+.ui.grid
+  .four.wide.column
+    .ui.small.header.center.aligned
+      .ui.large.black.circular.label
+        | White Player
+    - if @white_player.active
+      h4.ui.center.aligned.icon.header
+        i.circular.green.checkmark.icon
+        | White Player Turn!
+
+  .eight.wide.column
+    .ui.seven.column.grid.center.aligned
+      - %w(first second third fourth fifth sixth seventh).each do |name|
+        .green.column id="#{name}_column"
+          = link_to "<i class='black pointing down icon'></i>".html_safe, "/arena/drop_cap_to_#{name}_column", method: :patch, class: 'ui circular orange icon button', id: "#{name}_column_button"
+        
+        .ui.hidden.divider
+        
+        - @first_column.each do |row|
+          -if row.take? && row.white_player?
+            .ui.white.circular.label#column1_row
+          -elsif row.take? && !row.white_player
+            .ui.black.circular.label#column1_row
+          -else
+            .ui.grey.circular.label#column1_row
+            
+          .ui.hidden.divider
+
+  .four.wide.column
+    .ui.small.header.center.aligned
+      .ui.large.black.circular.label
+      | Black Player
+    - unless @white_player.active
+      h4.ui.center.aligned.icon.header
+        i.circular.green.checkmark.icon
+        | Black Player Turn!
+
+.ui.page.grid
+  .sixteen.wide.column.center.aligned
+    -if flash[:notice].present?
+      .row
+        .ui.large.orange.compact.message
+          .header
+            = flash[:notice]
+            p
+              = "It's #{@white_player.active ? 'White' : 'Black'} Turn!"
+    #winner
+
+
+script src="assets/c4.js"

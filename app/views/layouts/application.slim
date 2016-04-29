@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Connect Four
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
+    = javascript_include_tag 'application', 'data-turbolinks-track': true
+    = csrf_meta_tags
+
+  body
+
+    .ui.menu
+      .item Connect Four
+      .right.menu
+        .item
+          small Code Available at Github
+        .item
+          = link_to 'Reload Game', reload_arena_index_path, method: :post, class: 'ui primary button'
+
+    = yield
