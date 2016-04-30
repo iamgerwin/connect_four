@@ -16,6 +16,20 @@ $(document).ready(function(){
     checkDiagonalRightConnect();
   }
 
+  function getDraw() {
+    var names = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh'];
+    var results = [];
+    for (var i=1;i<8;i++) {
+      if ($('#'+names[i-1]+'_column_button').hasClass('ui olive icon button disabled')) {
+        results.push(true) ;
+      }
+    }
+    if (results.join() == "true,true,true,true,true,true,true") {
+      $('#winner').replaceWith("<h1><strong>Draw Game!</strong></h1>");
+      $('#status').replaceWith('Nobody Wins!');
+    }
+  }
+
   function checkHorizontalConnect() {
     for(var i=6;i>3;i--) {
       for(var j=1;j<3;j++) {
@@ -143,6 +157,7 @@ $(document).ready(function(){
     }
   }
 
+  getDraw();
   getSelectedButton();
   getWinner();
 });

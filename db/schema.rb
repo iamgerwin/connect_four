@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160429021224) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "fifth_columns", force: :cascade do |t|
     t.string  "name",         default: ""
     t.boolean "take",         default: false
